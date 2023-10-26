@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Fantasy Quiz Game</string>
+    <string name="account">Don\'t have an account yet? <font color="black"><b><u>Sign Up</u></b></font></string>
+    <string name="have_account">Already have an account? <font color="black"><b><u>Sign In</u></b></font></string>
+    <string name="forgot_password"><u>Forgot password?</u></string>
+    <string name="remember_password"><u>I remembered my password!</u></string>
+</resources>

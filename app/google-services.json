@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "797662078545",
+    "project_id": "fantasy-quiz-game",
+    "storage_bucket": "fantasy-quiz-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797662078545:android:6ed7ee87dec9fad757fa70",
+        "android_client_info": {
+          "package_name": "com.zakhar.fantasyquizgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797662078545-bnksl7384ju530re3vrdo52f16liks3v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zakhar.fantasyquizgame",
+            "certificate_hash": "7b6e8f701f7d539a617ce6db11671791750c61b5"
+          }
+        },
+        {
+          "client_id": "797662078545-kq7hku6dnto8uq4tvskv0mt7mvnfm2sa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuROYSOI_2EFXn_BVstQYLiw9qnMvGv6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797662078545-kq7hku6dnto8uq4tvskv0mt7mvnfm2sa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

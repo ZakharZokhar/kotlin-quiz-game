@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.FantasyQuizGame" parent="android:Theme.Material.Light.DarkActionBar" >
+        <item  name="colorPrimary">@color/purple_200</item>
+    </style>
+</resources>
