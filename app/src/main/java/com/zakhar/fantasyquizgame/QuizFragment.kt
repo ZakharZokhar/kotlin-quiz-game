@@ -2,25 +2,27 @@ package com.zakhar.fantasyquizgame
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.values
-import com.zakhar.fantasyquizgame.databinding.ActivityQuizBinding
+import com.zakhar.fantasyquizgame.databinding.FragmentQuizBinding
 import kotlin.random.Random
 
-class QuizActivity : AppCompatActivity() {
+class QuizFragment : Fragment() {
 
-    private lateinit var quizBinding: ActivityQuizBinding
+    private lateinit var quizBinding: FragmentQuizBinding
 
     private val database = FirebaseDatabase.getInstance("https://fantasy-quiz-game-default-rtdb.europe-west1.firebasedatabase.app/")
     private val databaseReference = database.reference.child("questions")
@@ -49,12 +51,11 @@ class QuizActivity : AppCompatActivity() {
 
     val questions = HashSet<Int>()
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        quizBinding = ActivityQuizBinding.inflate(layoutInflater)
-        val view = quizBinding.root
-        setContentView(view)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        quizBinding = FragmentQuizBinding.inflate(layoutInflater)
 
         setQuestions()
 
@@ -87,12 +88,14 @@ class QuizActivity : AppCompatActivity() {
             userAnswer = "d"
             markOptions(quizBinding.textViewD)
         }
+
+        return quizBinding.root
     }
 
     private fun gameLogic() {
         restoreOptions()
 
-        databaseReference.addValueEventListener(object : ValueEventListener{
+        databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
@@ -118,7 +121,7 @@ class QuizActivity : AppCompatActivity() {
 
                     startTimer()
                 } else {
-                    val dialogMessage = AlertDialog.Builder(this@QuizActivity)
+                    val dialogMessage = AlertDialog.Builder(requireActivity())
                     dialogMessage.setTitle("Quiz Game")
                     dialogMessage.setMessage("Congratulations!\nYou have answered all the questions. Do you want to see result?")
                     dialogMessage.setCancelable(false)
@@ -127,9 +130,8 @@ class QuizActivity : AppCompatActivity() {
                         dialogInterface.dismiss()
                     }
                     dialogMessage.setNegativeButton("Play Again") {dialogInterface, position ->
-                        val intent = Intent(this@QuizActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        val navController = findNavController()
+                        navController.navigate(R.id.action_quizFragment_to_homeFragment)
                         dialogInterface.dismiss()
                     }
                     dialogMessage.create().show()
@@ -140,7 +142,7 @@ class QuizActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(applicationContext, error.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext().applicationContext, error.message, Toast.LENGTH_SHORT).show()
             }
         })
 
@@ -239,10 +241,9 @@ class QuizActivity : AppCompatActivity() {
             scoreRef.child("scores").child(userUID).child("correct").setValue(userCorrect)
             scoreRef.child("scores").child(userUID).child("wrong").setValue(userWrong).addOnSuccessListener {
 
-                Toast.makeText(applicationContext, "Score saved successfully", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@QuizActivity, ResultActivity::class.java)
-                startActivity(intent)
-                finish()
+                Toast.makeText(requireContext().applicationContext, "Score saved successfully", Toast.LENGTH_SHORT).show()
+                val navController = findNavController()
+                navController.navigate(R.id.action_quizFragment_to_resultFragment)
 
             }
         }
@@ -250,7 +251,7 @@ class QuizActivity : AppCompatActivity() {
     }
 
     private fun setQuestions() {
-        databaseReference.addValueEventListener(object : ValueEventListener{
+        databaseReference.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
 

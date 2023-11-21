@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(mainBinding.toolbarMain)
 
-        mainBinding.buttonStart.setOnClickListener {
-            val intent = Intent(this, QuizActivity::class.java)
-            startActivity(intent)
-        }
+//        mainBinding.buttonStart.setOnClickListener {
+//            val intent = Intent(this, QuizActivity::class.java)
+//            startActivity(intent)
+//        }
 
 
     }
