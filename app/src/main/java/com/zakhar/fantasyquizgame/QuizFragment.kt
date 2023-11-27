@@ -125,13 +125,13 @@ class QuizFragment : Fragment() {
                     dialogMessage.setTitle("Quiz Game")
                     dialogMessage.setMessage("Congratulations!\nYou have answered all the questions. Do you want to see result?")
                     dialogMessage.setCancelable(false)
-                    dialogMessage.setPositiveButton("See Result") {dialogInterface, position ->
+                    dialogMessage.setPositiveButton("See Result") {dialogInterface, _ ->
                         sendScore()
                         dialogInterface.dismiss()
                     }
-                    dialogMessage.setNegativeButton("Play Again") {dialogInterface, position ->
+                    dialogMessage.setNegativeButton("Play Again") {dialogInterface, _ ->
                         val navController = findNavController()
-                        navController.navigate(R.id.action_quizFragment_to_homeFragment)
+                        navController.popBackStack()
                         dialogInterface.dismiss()
                     }
                     dialogMessage.create().show()

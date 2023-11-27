@@ -26,7 +26,7 @@ class SignUpFragment : Fragment() {
         val navController = findNavController()
 
         signUpBinding.textViewSignIn.setOnClickListener {
-            navController.navigate(R.id.action_signUpFragment_to_logInFragment)
+            navController.popBackStack()
         }
 
         signUpBinding.buttonSignUp.setOnClickListener {

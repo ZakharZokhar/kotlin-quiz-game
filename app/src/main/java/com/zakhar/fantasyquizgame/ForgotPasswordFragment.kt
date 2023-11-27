@@ -29,7 +29,7 @@ class ForgotPasswordFragment : Fragment() {
             auth.sendPasswordResetEmail(email).addOnCompleteListener {task ->
                 if (task.isSuccessful) {
                     Toast.makeText(requireContext().applicationContext, "We sent a password reset to your email address", Toast.LENGTH_SHORT).show()
-                    navController.navigate(R.id.action_forgotPasswordFragment_to_logInFragment)
+                    navController.popBackStack()
                 } else {
                     Toast.makeText(requireContext().applicationContext, task.exception?.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
@@ -38,7 +38,7 @@ class ForgotPasswordFragment : Fragment() {
         }
 
         forgotBinding.textViewRememberPassword.setOnClickListener {
-            navController.navigate(R.id.action_forgotPasswordFragment_to_logInFragment)
+            navController.popBackStack()
         }
 
         return forgotBinding.root
