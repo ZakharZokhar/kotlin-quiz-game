@@ -54,7 +54,7 @@ class ResultFragment : Fragment() {
 
         resultBinding.buttonPlayAgain.setOnClickListener {
             val navController = findNavController()
-            navController.popBackStack(R.id.homeFragment, true)
+            navController.navigate(R.id.action_resultFragment_to_homeFragment)
         }
 
         return resultBinding.root
